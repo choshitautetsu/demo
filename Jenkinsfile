@@ -9,6 +9,7 @@ pipeline {
 apiVersion: v1
 kind: Pod
 spec:
+  serviceAccountName: jenkins 
   containers:
   - name: kubectl
     image: bitnami/kubectl:1.27.4
