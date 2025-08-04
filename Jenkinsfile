@@ -41,11 +41,11 @@ spec:
         container('kubectl') {
           script {
             if (params.choices == 'deploy blue') {
-              sh 'kubectl apply -f deploy-blue.yaml'
-              sh 'kubectl apply -f svc-prod.yaml'
+              sh 'kubectl -n apply -f deploy-blue.yaml'
+              sh 'kubectl -n apply -f svc-prod.yaml'
             } else if (params.choices == 'deploy green') {
-              sh 'kubectl apply -f deploy-green.yaml'
-              sh 'kubectl apply -f svc-dev.yaml'
+              sh 'kubectl -n apply -f deploy-green.yaml'
+              sh 'kubectl -n apply -f svc-dev.yaml'
             } else if (params.choices == 'switch traffic') {
               sh 'kubectl -n jenkins patch svc demo-blue-svc -p "{\"spec\":{\"selector\":{\"app\":\"demo-green\"}}}"'
             } else if (params.choices == 'rollout blue') {
