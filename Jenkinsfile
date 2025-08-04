@@ -55,7 +55,9 @@ spec:
               kubectl -n blue-green patch svc demo-blue-svc -p '{"spec":{"selector":{"app":"demo-green"}}}'
               """
             } else if (params.choices == 'rollout blue') {
-              sh 'kubectl -n blue-green patch svc demo-blue-svc -p "{\"spec\":{\"selector\":{\"app\":\"demo-blue\"}}}"'
+              sh """
+              kubectl -n blue-green patch svc demo-blue-svc -p '{"spec":{"selector":{"app":"demo-blue"}}}'
+              """
             } else {
               echo "No valid choice selected."
             }
