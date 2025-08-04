@@ -41,15 +41,15 @@ spec:
         container('kubectl') {
           script {
             if (params.choices == 'deploy blue') {
-              sh 'kubectl -n apply -f deploy-blue.yaml'
-              sh 'kubectl -n apply -f svc-prod.yaml'
+              sh 'kubectl -n blue-green apply -f deploy-blue.yaml'
+              sh 'kubectl -n blue-green apply -f svc-prod.yaml'
             } else if (params.choices == 'deploy green') {
-              sh 'kubectl -n apply -f deploy-green.yaml'
-              sh 'kubectl -n apply -f svc-dev.yaml'
+              sh 'kubectl -n blue-green apply -f deploy-green.yaml'
+              sh 'kubectl -n blue-green apply -f svc-dev.yaml'
             } else if (params.choices == 'switch traffic') {
-              sh 'kubectl -n jenkins patch svc demo-blue-svc -p "{\"spec\":{\"selector\":{\"app\":\"demo-green\"}}}"'
+              sh 'kubectl -n blue-green patch svc demo-blue-svc -p "{\"spec\":{\"selector\":{\"app\":\"demo-green\"}}}"'
             } else if (params.choices == 'rollout blue') {
-              sh 'kubectl -n jenkins patch svc demo-blue-svc -p "{\"spec\":{\"selector\":{\"app\":\"demo-blue\"}}}"'
+              sh 'kubectl -n blue-green patch svc demo-blue-svc -p "{\"spec\":{\"selector\":{\"app\":\"demo-blue\"}}}"'
             } else {
               echo "No valid choice selected."
             }
