@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: demo-blue
-  namespace: blue-green
+  namespace: jenkins
 spec:
   replicas: 2
   selector:
